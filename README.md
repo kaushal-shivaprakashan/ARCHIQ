@@ -23,7 +23,7 @@ ArchIQ is an **AI-powered data pipeline architecture generator** built for data 
 
 You answer **15 structured questions** about your use case, cloud platform, team size, budget, and compliance needs — and ArchIQ returns a **complete interactive architecture diagram** with:
 
-- ✅ Real tool logos (Snowflake, dbt, Kafka, Spark, Airflow, Fivetran, and 35+ more)
+- ✅ Real tool  (Snowflake, dbt, Kafka, Spark, Airflow, Fivetran, and 35+ more)
 - ✅ Expert reasoning — *why* each tool was chosen, in 4 bullet points per node
 - ✅ Tradeoffs — *what can go wrong*, 3 bullets per node
 - ✅ Monthly cost breakdown with optimization suggestions
