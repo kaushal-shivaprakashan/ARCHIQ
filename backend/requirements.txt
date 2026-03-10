@@ -1,0 +1,30 @@
+# =============================================
+# ArchIQ Backend — Production Dependencies
+# Install: pip install -r requirements.txt
+# Python 3.11+ required
+# =============================================
+
+# === Web Framework ===
+fastapi==0.110.0
+uvicorn[standard]==0.27.1
+
+# === Validation & Settings ===
+pydantic==2.6.3
+pydantic-settings==2.2.1
+
+# === AI / LLM ===
+anthropic==0.21.3
+openai==1.14.0          # For text-embedding-3-small (RAG embeddings)
+
+# === Database ===
+asyncpg==0.29.0         # Async PostgreSQL driver
+pgvector==0.2.5         # Vector similarity search extension
+
+# === Cache ===
+aioredis==2.0.1         # Async Redis client
+
+# === HTTP ===
+httpx==0.27.0           # Async HTTP client
+
+# === Utilities ===
+python-dotenv==1.0.1    # .env file loading

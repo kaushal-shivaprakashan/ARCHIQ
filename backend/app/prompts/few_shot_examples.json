@@ -1,0 +1,74 @@
+[
+  {
+    "input": "Requirements: {\"industry\": \"fintech\", \"usecase\": \"analytics\", \"cloud\": \"aws\", \"volume\": \"medium\", \"latency\": \"batch_hourly\", \"team\": \"small\", \"budget\": \"startup\", \"compliance\": [\"soc2\", \"pci\"]}",
+    "output": {
+      "nodes": [
+        {
+          "id": "warehouse",
+          "label": "Amazon Redshift",
+          "sublabel": "Columnar MPP Warehouse",
+          "category": "warehouse",
+          "x": 880, "y": 180,
+          "why": [
+            "Native AWS integration reduces VPC egress costs to near zero",
+            "Redshift Spectrum queries S3 cold data without loading — saves storage cost",
+            "Column-level encryption meets PCI-DSS data-at-rest requirements",
+            "Concurrency Scaling handles burst reporting without cluster resize"
+          ],
+          "tradeoffs": [
+            "Vacuum and analyze required regularly — add to Airflow maintenance DAGs",
+            "Concurrency Scaling adds ~$0.013/second — watch for runaway queries",
+            "Snowflake would outperform at 10TB+ — revisit at growth stage"
+          ],
+          "cost_key": "Amazon Redshift",
+          "alts": ["Snowflake", "BigQuery"]
+        }
+      ],
+      "edges": [],
+      "warnings": [
+        {
+          "type": "conflict",
+          "msg": "⚠ PCI-DSS + Startup budget: PCI compliance audit costs $15–50K/yr — ensure this is budgeted separately from infrastructure."
+        }
+      ],
+      "summary": "AWS-native analytics stack optimized for SOC2/PCI compliance with hourly batch processing. Small team tooling prioritizes managed services to minimize operational burden.",
+      "tags": ["AWS", "Analytics", "Batch", "PCI-DSS", "SOC2", "SMB"]
+    }
+  },
+  {
+    "input": "Requirements: {\"industry\": \"saas\", \"usecase\": \"realtime\", \"cloud\": \"gcp\", \"volume\": \"large\", \"latency\": \"streaming\", \"team\": \"large\", \"budget\": \"growth\", \"compliance\": [\"gdpr\"]}",
+    "output": {
+      "nodes": [
+        {
+          "id": "kafka",
+          "label": "Google Pub/Sub",
+          "sublabel": "Event Streaming Platform",
+          "category": "streaming",
+          "x": 220, "y": 180,
+          "why": [
+            "Serverless — no broker sizing, auto-scales to millions of messages/sec",
+            "Native Dataflow integration enables exactly-once stream processing",
+            "GDPR-compliant: messages deleted on ACK, no long-term retention by default",
+            "Global topics support multi-region event ingestion for GDPR data residency"
+          ],
+          "tradeoffs": [
+            "No consumer groups — Dataflow or custom code needed for ordered processing",
+            "Kafka-compatible API (Pub/Sub Lite) has higher latency than native Kafka",
+            "At 10TB+/day message costs exceed managed Kafka — evaluate Pub/Sub Lite"
+          ],
+          "cost_key": "Google Pub/Sub",
+          "alts": ["Apache Kafka on GKE", "Confluent Cloud", "Pub/Sub Lite"]
+        }
+      ],
+      "edges": [],
+      "warnings": [
+        {
+          "type": "conflict",
+          "msg": "⚠ GDPR + Large scale streaming: Ensure PII fields are encrypted at Pub/Sub topic level and implement right-to-erasure pipeline for stored event data."
+        }
+      ],
+      "summary": "GCP-native real-time streaming architecture leveraging serverless Pub/Sub and Dataflow for GDPR-compliant event processing at enterprise scale.",
+      "tags": ["GCP", "Real-time", "Streaming", "Enterprise", "GDPR"]
+    }
+  }
+]
